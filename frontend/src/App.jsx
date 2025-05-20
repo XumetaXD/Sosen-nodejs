@@ -34,7 +34,7 @@ function App() {
     if (res.ok) {
       const nuevo = await res.json();
       setInversores([...inversores, nuevo]);
-      setFormData({ nombre: '', estado: '', voltaje: '', corriente: '', temperatura: '' });
+      setFormData({ nombre: '', estado: '', soc: '', potencia: '', CargaDescarga: '' });
     } else {
       alert('Error al agregar inversor');
     }
@@ -47,7 +47,7 @@ function App() {
       <form onSubmit={handleSubmit}>
         <input name="nombre" value={formData.nombre} onChange={handleChange} placeholder="Nombre" required />
         <input name="estado" value={formData.estado} onChange={handleChange} placeholder="Estado" required />
-        <input name="Soc" value={formData.Soc} onChange={handleChange} placeholder="Soc (%)" />
+        <input name="soc" value={formData.Soc} onChange={handleChange} placeholder="Soc (%)" />
         <input name="potencia" value={formData.potencia} onChange={handleChange} placeholder="Potencia (W)" />
         <input name="CargaDescarga" value={formData.CargaDescarga} onChange={handleChange} placeholder="CargaDescarga" />
         <button type="submit">Agregar Inversor</button>
@@ -66,10 +66,4 @@ function App() {
 }
 
 export default App;
-import InversorChart from './components/InversorChart';
-<InversorChart inversores={inversores} />
-import SosenRealtime from './components/SosenRealtime';
-
-// ...dentro del return principal
-<SosenRealtime />
 

@@ -1,97 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard Inversores</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 40px auto;
-      padding: 20px;
-      background: #f9f9f9;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-    form > input, button {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      font-size: 1rem;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      background: #e0ffe0;
-      margin: 8px 0;
-      padding: 8px;
-      border-radius: 5px;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Dashboard de Inversores</h1>
-
-  <form id="formInversor">
-    <input type="text" name="nombre" placeholder="Nombre del inversor" required />
-    <input type="text" name="estado" placeholder="Estado" required />
-    <input type="number" name="soc" placeholder="Soc (%)" />
-    <input type="number" name="Potencia" placeholder="Potencia (W)" />
-    <input type="number" name="CargaDescarga" placeholder="CargaDescarga" />
-    <button type="submit">Agregar Inversor</button>
-  </form>
-
-  <h2>Lista de Inversoress</h2>
-  <ul id="listaInversores"></ul>
-
-  <script>
-    // Cargar todos los inversores al iniciar
-    async function cargarInversores() {
-      const res = await fetch('http://localhost:5000/api/inversores');
-      const datos = await res.json();
-      const lista = document.getElementById('listaInversores');
-      lista.innerHTML = '';
-      datos.forEach(inv => {
-        const li = document.createElement('li');
-        li.textContent = `${inv.nombre} | ${inv.estado} | ${inv.soc || '-'}% | ${inv.corriente || '-'}W | ${inv.CargaDescarga || '-'}`;
-        lista.appendChild(li);
-      });
-    }
-
-    // Enviar nuevo inversor
-    document.getElementById('formInversor').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const formData = new FormData(this);
-      const data = {};
-      formData.forEach((v, k) => data[k] = v);
-
-      const res = await fetch('http://localhost:5000/api/inversores', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
-
-      if (res.ok) {
-        this.reset();
-        await cargarInversores();
-        alert('Inversor agregado correctamente');
-      } else {
-        alert('Error al agregar el inversor');
-      }
-    });
-
-    // Inicializar lista
-    cargarInversores();
-  </script>
-
-</body>
+<!doctype html>
+<html>
+  <head>
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <script type="module" src="/src/main.jsx"></script>
+    <div id="root"></div>
+  </body>
 </html>

@@ -20,13 +20,13 @@ function SosenRealtime() {
 
   return (
     <div style={{ marginTop: 40 }}>
-      <h3>📡 Datos en Tiempo Real del Inversor SOSEN</h3>
+      <h3>📡 Datos en Tiempo Real del Inversor SOSEN {data.deviceId}</h3>
       <ul>
-        <li>Potencia Salida (Output): {data.outputPower} W</li>
-        <li>Potencia PV: {data.pvPower} W</li>
-        <li>Temperatura: {data.temperature} °C</li>
-        <li>Voltaje AC: {data.vac1} V</li>
-        <li>Corriente AC: {data.iac1} A</li>
+        <li>Potencia Salida (Output): {data.ppv * data.ipv} W</li>
+        <li>Potencia PV: {data.vpv * data.ipv} W</li>
+        <li>Temperatura: XX °C</li>
+        <li>Voltaje AC: {data.vpv} V</li>
+        <li>Corriente AC: {data.ipv} A</li>
       </ul>
     </div>
   );
